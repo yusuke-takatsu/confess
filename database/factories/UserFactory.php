@@ -20,6 +20,8 @@ class UserFactory extends Factory
     {
         return [
             'email' => fake()->unique()->safeEmail(),
+            'name' => $this->faker->name(),
+            'image' => $this->faker->image(),
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
         ];

@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('email')->unique()->comment('メールアドレス');
+            $table->string('name')->comment('名前');
+            $table->string('image')->nullable()->comment('名前');
             $table->timestamp('email_verified_at')->nullable()->comment('検証済み日');
             $table->string('password')->comment('パスワード');
             $table->boolean('is_guest')->default(false)->comment('ゲストユーザーか否か');

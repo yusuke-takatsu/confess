@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\AuthController;
 use Illuminate\Http\Request;
@@ -23,6 +24,10 @@ Route::middleware('auth:user')->group(function() {
     Route::get('/{id}', [ProfileController::class, 'show'])->name('show');
     Route::post('/', [ProfileController::class, 'store'])->name('store');
     Route::post('/update', [ProfileController::class, 'update'])->name('update');
+  });
+
+  Route::prefix('/posts')->name('post.')->group(function() {
+    Route::get('/', [PostController::class, 'index'])->name('index');
   });
 });
 
