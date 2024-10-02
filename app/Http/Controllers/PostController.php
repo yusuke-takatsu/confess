@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Post\IndexRequest;
+use App\Http\Requests\Post\StoreRequest;
 use App\Models\Post;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -40,5 +43,20 @@ class PostController extends Controller
     $posts = $query->get();
 
     return response()->json($posts);
+  }
+
+  public function store(StoreRequest $request)
+  {
+      $user = Auth::user();
+
+      Post::create([
+          'user_id' => $user->id,
+          'category_id' => $request->input('category_id'),
+          'content' => $request->input('content'),
+      ]);
+
+      return response()->json([
+          'message' => '懺悔を登録しました。',
+      ]);
   }
 }
